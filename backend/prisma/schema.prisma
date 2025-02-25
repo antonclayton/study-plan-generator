@@ -16,6 +16,6 @@ datasource db {
 model StudyPlan {
   id        String   @id @default(uuid())
   goal      String
-  plan      String
+  plan      String?
   createdAt DateTime @default(now())
 }
