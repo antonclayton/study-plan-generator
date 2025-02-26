@@ -2,7 +2,7 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
-import StudyPlan from "./pages/StudyPlan";
+import StudyPlan from "./pages/StudyPlanPage";
 
 function App() {
   return (

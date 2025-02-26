@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StudyPlan as StudyPlanType } from "../types/StudyPlanTypes";
+import { StudyPlanType } from "../types/StudyPlanTypes";
 import {
   StudyPlansList,
   CreatePlan,
@@ -14,12 +14,12 @@ const StudyPlan = () => {
       {/*Left side -> CreatePlan and StudyPlanList components */}
       <div className="w-1/3 p-4">
         <CreatePlan />
-        <StudyPlansList />
+        <StudyPlansList studyPlans={studyPlans} />
       </div>
 
       {/*Right side -> Study Plan View */}
-      <div>
-        <StudyPlanView />
+      <div className="w-2/3 p-4">
+        <StudyPlanView selectedPlan={selectedPlan} />
       </div>
     </div>
   );
