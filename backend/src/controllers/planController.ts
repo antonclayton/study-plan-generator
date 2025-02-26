@@ -37,7 +37,7 @@ export async function createStudyPlan(
     const newStudyPlan = await prisma.studyPlan.create({
       data: {
         goal: goal,
-        plan: "",
+        plan: "", // TODO: plan must be generated using goal and then passed into this function
       },
       select: {
         id: true,
@@ -48,7 +48,7 @@ export async function createStudyPlan(
     });
     res
       .status(201)
-      .json({ message: "Study plan successfully created", newStudyPlan });
+      .json({ message: "Study plan successfully created", data: newStudyPlan });
   } catch (error) {
     next(error);
   }
