@@ -46,7 +46,9 @@ export async function createStudyPlan(
         createdAt: true,
       },
     });
-    res.status(201).json({ message: "Study plan successfully created", goal });
+    res
+      .status(201)
+      .json({ message: "Study plan successfully created", newStudyPlan });
   } catch (error) {
     next(error);
   }
