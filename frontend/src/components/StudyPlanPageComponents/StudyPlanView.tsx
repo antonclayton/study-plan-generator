@@ -1,5 +1,5 @@
-import React from "react";
-import { StudyPlanType } from "../../types/StudyPlanTypes";
+import React, { useState } from "react";
+import { StudyPlanInputType, StudyPlanType } from "../../types/StudyPlanTypes";
 
 interface StudyPlanViewProps {
   selectedPlan: StudyPlanType | null;

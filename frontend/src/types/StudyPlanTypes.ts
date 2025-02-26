@@ -1,6 +1,6 @@
 export interface StudyPlanInputType {
   goal: string;
-  plan: string;
+  plan?: string;
 }
 
 export interface StudyPlanType extends StudyPlanInputType {
