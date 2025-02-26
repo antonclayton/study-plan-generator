@@ -37,10 +37,12 @@ export async function createStudyPlan(
     const newStudyPlan = await prisma.studyPlan.create({
       data: {
         goal: goal,
+        plan: "",
       },
       select: {
         id: true,
         goal: true,
+        plan: true,
         createdAt: true,
       },
     });

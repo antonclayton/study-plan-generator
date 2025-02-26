@@ -14,7 +14,7 @@ const StudyPlan = () => {
 
   const handleCreateStudyPlan = async (newPlan: StudyPlanInputType) => {
     try {
-      const response = await fetch("/api/plans", {
+      const response = await fetch("http://localhost:5000/api/v1/plans", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -30,7 +30,7 @@ const StudyPlan = () => {
         );
       }
 
-      const createdPlan = await response.json();
+      const createdPlan: StudyPlanType = await response.json();
       console.log("Created Plan:", createdPlan);
 
       setStudyPlans([...studyPlans, createdPlan]);
