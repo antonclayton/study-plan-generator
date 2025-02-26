@@ -26,18 +26,18 @@ const CreatePlan: React.FC<CreatePlanProps> = ({ handleCreateStudyPlan }) => {
         placeholder="I want to learn _____"
         value={goal}
         onChange={(e) => setGoal(e.target.value)}
-        className="border-2 border-black m-2"
+        className="border-2 border-black m-2 text-center bg-white p-2 rounded-xl"
       />
       <input
         type="text"
         placeholder="plan placeholder"
         value={plan}
         onChange={(e) => setPlan(e.target.value)}
-        className="border-2 border-black m-2 w-3/4"
+        className="border-2 border-black m-2 w-3/4 bg-white p-2 rounded-xl"
       />
       <button
         onClick={handleSubmit}
-        className="border-2 bg-white cursor-pointer p-2 rounded-xl m-2"
+        className="border-2 bg-green-800 cursor-pointer py-2 px-4 rounded-xl m-2 text-white border-black font-bold"
       >
         Generate Plan
       </button>

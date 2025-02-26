@@ -23,11 +23,17 @@ const StudyPlan = () => {
       });
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(
-          `HTTP Error! status: ${response.status}, message: ${
-            errorData.message || response.statusText
-          }`
-        );
+
+        if (errorData.errors) {
+          const validationErrors = errorData.errors;
+          throw new Error(JSON.stringify(validationErrors));
+        } else {
+          throw new Error(
+            `HTTP Error! status: ${response.status}, message: ${
+              errorData.message || response.statusText
+            }`
+          );
+        }
       }
 
       const responseData = await response.json();
@@ -40,7 +46,7 @@ const StudyPlan = () => {
       setSelectedPlan(createdPlan);
     } catch (error) {
       console.error("Error creating study plan:", error);
-      alert("Error creating study plan. Please try again.");
+      // alert("Error creating study plan. Please try again.");
     }
   };
 
