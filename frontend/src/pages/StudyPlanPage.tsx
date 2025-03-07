@@ -17,7 +17,7 @@ const examplePlans: StudyPlanType[] = [
   },
   {
     goal: "Node.js",
-    plan: "do this and that",
+    plan: "Node.js is a runtime environment for JavaScript that is especially useful for backend development",
     id: "2",
     createdAt: new Date(),
   },

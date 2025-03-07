@@ -11,8 +11,16 @@ const StudyPlanListObject: React.FC<StudyPlanListObjectProps> = ({
   onClick,
 }) => {
   return (
-    <div onClick={onClick}>
-      <h2>{studyPlan.goal}</h2>
+    <div
+      className="w-full bg-white border-2 rounded-lg py-0.5 px-1 lg:py-2 lg:px-4"
+      onClick={onClick}
+    >
+      <h2 className="text-black w-full text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl">
+        I want to learn {studyPlan.goal}
+      </h2>
+      <p className="w-full text-[9px] text-gray-700 sm:text-xs md:text-sm lg:text-base xl:text-lg">
+        {studyPlan.plan?.substring(0, 30)}...
+      </p>
     </div>
   );
 };
