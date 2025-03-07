@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { StudyPlanType, StudyPlanInputType } from "../types/StudyPlanTypes";
 import {
   StudyPlansList,
@@ -8,8 +8,36 @@ import {
 
 // passed into CreatePlan component as props
 
+const examplePlans: StudyPlanType[] = [
+  {
+    goal: "React.js",
+    plan: "do this and that",
+    id: "1",
+    createdAt: new Date(),
+  },
+  {
+    goal: "React.js",
+    plan: "do this and that",
+    id: "2",
+    createdAt: new Date(),
+  },
+  {
+    goal: "React.js",
+    plan: "do this and that",
+    id: "3",
+    createdAt: new Date(),
+  },
+  {
+    goal: "React.js",
+    plan: "do this and that",
+    id: "4",
+    createdAt: new Date(),
+  },
+];
+
 const StudyPlan = () => {
-  const [studyPlans, setStudyPlans] = useState<StudyPlanType[]>([]); // List of study plans.
+  // TODO: reset studyPlans useState to [] by default OR add logic to fill studyPlans with plans from DB
+  const [studyPlans, setStudyPlans] = useState<StudyPlanType[]>(examplePlans); // List of study plans.
   const [selectedPlan, setSelectedPlan] = useState<StudyPlanType | null>(null); // the study plan to be displayed in the StudyPlanDisplay component.
 
   const handleCreateStudyPlan = async (newPlan: StudyPlanInputType) => {
