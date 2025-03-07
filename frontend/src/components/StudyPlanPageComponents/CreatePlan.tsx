@@ -20,7 +20,7 @@ const CreatePlan: React.FC<CreatePlanProps> = ({ handleCreateStudyPlan }) => {
     setPlan("");
   };
   return (
-    <div className="flex flex-col justify-center items-center w-full bg-gray-700 h-1/4 m-2 rounded-xl">
+    <div className="flex flex-col justify-center items-center w-full bg-gray-700 h-1/4">
       <p className="w-2/3 text-[10px] lg:p-1 lg:m-1 sm:text-sm lg:text-base xl:text-lg text-white text-center">
         Please be specific! <br />
         Example: Introductory Python
