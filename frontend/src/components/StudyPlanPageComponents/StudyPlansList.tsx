@@ -14,7 +14,7 @@ const StudyPlansList: React.FC<StudyPlansListProps> = ({
   onStudyPlanClick,
 }) => {
   return (
-    <div className="flex justify-center items-center w-full bg-blue-400 h-3/4">
+    <div className="flex justify-center items-center w-full bg-blue-400 h-3/4 border-1">
       {/* List container (overflows y)*/}
       <div>
         {studyPlans && studyPlans.length > 0 ? (
