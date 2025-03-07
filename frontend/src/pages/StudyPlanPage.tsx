@@ -16,19 +16,19 @@ const examplePlans: StudyPlanType[] = [
     createdAt: new Date(),
   },
   {
-    goal: "React.js",
+    goal: "Node.js",
     plan: "do this and that",
     id: "2",
     createdAt: new Date(),
   },
   {
-    goal: "React.js",
+    goal: "MongoDB",
     plan: "do this and that",
     id: "3",
     createdAt: new Date(),
   },
   {
-    goal: "React.js",
+    goal: "PostgresSQL",
     plan: "do this and that",
     id: "4",
     createdAt: new Date(),
@@ -78,12 +78,19 @@ const StudyPlan = () => {
     }
   };
 
+  const onStudyPlanClick = (studyPlan: StudyPlanType) => {
+    setSelectedPlan(studyPlan);
+  };
+
   return (
     <div className="flex bg-white h-[calc(100vh-4rem)]">
       {/*Left side -> CreatePlan and StudyPlanList components */}
       <div className="w-1/3 flex flex-col h-full">
         <CreatePlan handleCreateStudyPlan={handleCreateStudyPlan} />
-        <StudyPlansList studyPlans={studyPlans} />
+        <StudyPlansList
+          studyPlans={studyPlans}
+          onStudyPlanClick={onStudyPlanClick}
+        />
       </div>
 
       {/*Right side -> Study Plan View */}
