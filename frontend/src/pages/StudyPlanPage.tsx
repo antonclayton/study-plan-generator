@@ -33,6 +33,30 @@ const examplePlans: StudyPlanType[] = [
     id: "4",
     createdAt: new Date(),
   },
+  {
+    goal: "Introductory Python",
+    plan: "do this and that",
+    id: "5",
+    createdAt: new Date(),
+  },
+  {
+    goal: "NoSQL Databases",
+    plan: "do this and that",
+    id: "5",
+    createdAt: new Date(),
+  },
+  {
+    goal: "Introductory Java",
+    plan: "do this and that",
+    id: "6",
+    createdAt: new Date(),
+  },
+  {
+    goal: "TypeScript Interfaces",
+    plan: "do this and that",
+    id: "7",
+    createdAt: new Date(),
+  },
 ];
 
 const StudyPlan = () => {
