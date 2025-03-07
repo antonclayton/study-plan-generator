@@ -39,8 +39,8 @@ const StudyPlan = () => {
       const responseData = await response.json();
       const createdPlan: StudyPlanType = responseData.data;
       const message: string = responseData.message;
-      // console.log("Created Plan:", createdPlan);
-      // console.log("Message:", message);
+      console.log("Created Plan:", createdPlan); // testing purposes
+      console.log("Message:", message);
 
       setStudyPlans([...studyPlans, createdPlan]);
       setSelectedPlan(createdPlan);
