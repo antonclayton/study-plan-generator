@@ -7,6 +7,8 @@ interface StudyPlansListProps {
   onStudyPlanClick: (studyPlan: StudyPlanType) => void;
 }
 
+// TODO: ADD SEARCH FUNCTION TO SEARCH FOR STUDYPLANS BY GOAL
+
 // List of StudyPlans (Only shows the Goal of the study plan and not the generated plan)
 // List items can be clicked to display them in StudyPlan page.
 const StudyPlansList: React.FC<StudyPlansListProps> = ({
