@@ -30,7 +30,7 @@ const CreatePlan: React.FC<CreatePlanProps> = ({ handleCreateStudyPlan }) => {
         placeholder="I want to learn _______!"
         value={goal}
         onChange={(e) => setGoal(e.target.value)}
-        className="border-2 border-black m-0.5 text-center w-3/4 bg-zinc-300 p-0.5 rounded-xl text-xs lg:p-2 lg:m-2 lg:text-xl font-bold"
+        className="border-2 border-black m-0.5 text-center w-3/4 bg-zinc-800 p-0.5 rounded-xl text-xs lg:p-2 lg:m-2 lg:text-xl font-bold text-white placeholder:text-zinc-400"
       />
       {/* <input
         type="text"
