@@ -8,6 +8,7 @@ import {
 } from "../zodSchemas/studyPlanSchema";
 import { ValidationError } from "../errors/ValidationError";
 import { NotFoundError } from "../errors/NotFoundError";
+import { generateStudyPlan } from "../utils/aiServices";
 
 export async function getAllStudyPlans(
   req: Request,
@@ -34,10 +35,11 @@ export async function createStudyPlan(
   }
   const { goal } = validatedBody.data;
   try {
+    const aiGeneratedPlan = await generateStudyPlan(goal);
     const newStudyPlan = await prisma.studyPlan.create({
       data: {
         goal: goal,
-        plan: "", // TODO: plan must be generated using goal and then passed into this function
+        plan: aiGeneratedPlan,
       },
       select: {
         id: true,
