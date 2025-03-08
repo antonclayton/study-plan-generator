@@ -16,7 +16,7 @@ const StudyPlansList: React.FC<StudyPlansListProps> = ({
   onStudyPlanClick,
 }) => {
   return (
-    <div className="flex flex-col items-center w-full bg-zinc-950 h-3/4 rounded-b-3xl border-x-4 border-t-2 border-b-4 border-zinc-700">
+    <div className="flex flex-col items-center w-full bg-zinc-950 h-3/4 rounded-b-3xl border-x-4 border-t-2 border-b-4 border-zinc-700 overflow-visible">
       <div className="flex flex-col w-3/4 mt-2 sm:mt-6 lg:mt-10">
         <h2 className="font-bold text-white m-2 text-sm sm:text-base lg:text-xl xl:text-2xl">
           Study Plans:
@@ -24,7 +24,7 @@ const StudyPlansList: React.FC<StudyPlansListProps> = ({
         <span className="bg-zinc-700 h-0.5 mb-2 rounded-full"></span>
       </div>
       {/* List container (overflows y)*/}
-      <div className="flex flex-col justify-start items-center w-3/4 max-h-3/4 overflow-y-auto">
+      <div className="flex flex-col justify-start items-center w-3/4 max-h-3/4 overflow-y-auto overflow-x-hidden">
         {studyPlans && studyPlans.length > 0 ? (
           studyPlans.map((studyPlan) => (
             <StudyPlanListObject

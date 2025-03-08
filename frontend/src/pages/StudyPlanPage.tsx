@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StudyPlanType, StudyPlanInputType } from "../types/StudyPlanTypes";
 import {
   StudyPlansList,
@@ -61,7 +61,7 @@ const examplePlans: StudyPlanType[] = [
 
 const StudyPlan = () => {
   // TODO: reset studyPlans useState to [] by default OR add logic to fill studyPlans with plans from DB
-  const [studyPlans, setStudyPlans] = useState<StudyPlanType[]>(examplePlans); // List of study plans.
+  const [studyPlans, setStudyPlans] = useState<StudyPlanType[]>([]); // List of study plans.
   const [selectedPlan, setSelectedPlan] = useState<StudyPlanType | null>(null); // the study plan to be displayed in the StudyPlanDisplay component.
 
   const handleCreateStudyPlan = async (newPlan: StudyPlanInputType) => {
@@ -102,9 +102,41 @@ const StudyPlan = () => {
     }
   };
 
+  useEffect(() => {
+    const fetchStudyPlans = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/v1/plans");
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(
+            `HTTP Error! status: ${response.status}, message: ${errorData}`
+          );
+        }
+
+        const responseData = await response.json();
+
+        console.log(responseData);
+
+        if (responseData) {
+          setStudyPlans(responseData);
+        } else {
+          console.warn("No study plans found or unexpected response structure");
+          setStudyPlans([]);
+        }
+      } catch (error) {
+        console.error("Error creating study plan: ");
+      }
+    };
+    fetchStudyPlans();
+  }, []);
+
   const onStudyPlanClick = (studyPlan: StudyPlanType) => {
     setSelectedPlan(studyPlan);
   };
+
+  //TODO: Refresh logic when studyPLans changes)
+  useEffect(() => {}, [studyPlans]);
 
   return (
     <div className="flex bg-black h-[calc(100vh-4rem)]">
