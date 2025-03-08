@@ -12,7 +12,7 @@ const StudyPlanListObject: React.FC<StudyPlanListObjectProps> = ({
 }) => {
   return (
     <div
-      className="w-full bg-white border-2 rounded-lg py-0.5 px-1 lg:py-2 lg:px-4 cursor-pointer hover:bg-gray-200 my-0.5 sm:my-1 lg:my-2"
+      className="w-full bg-zinc-400 border-2 rounded-lg py-0.5 px-1 lg:py-2 lg:px-4 cursor-pointer hover:bg-zinc-300 my-0.5 sm:my-1 lg:my-2"
       onClick={onClick}
     >
       <h2 className="text-black w-full text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl">

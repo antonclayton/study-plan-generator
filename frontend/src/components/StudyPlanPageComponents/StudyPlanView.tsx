@@ -7,7 +7,7 @@ interface StudyPlanViewProps {
 
 const StudyPlanView: React.FC<StudyPlanViewProps> = ({ selectedPlan }) => {
   return (
-    <div className="flex justify-center items-center w-full bg-green-400 h-full border-1">
+    <div className="flex justify-center items-center w-full h-full border-4 rounded-3xl bg-zinc-950 border-zinc-700">
       StudyPlanView
     </div>
   );

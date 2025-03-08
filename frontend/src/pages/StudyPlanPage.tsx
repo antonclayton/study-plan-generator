@@ -107,9 +107,9 @@ const StudyPlan = () => {
   };
 
   return (
-    <div className="flex bg-white h-[calc(100vh-4rem)]">
+    <div className="flex bg-black h-[calc(100vh-4rem)]">
       {/*Left side -> CreatePlan and StudyPlanList components */}
-      <div className="w-1/3 flex flex-col h-full">
+      <div className="w-1/3 flex flex-col h-full mx-1">
         <CreatePlan handleCreateStudyPlan={handleCreateStudyPlan} />
         <StudyPlansList
           studyPlans={studyPlans}
@@ -118,7 +118,7 @@ const StudyPlan = () => {
       </div>
 
       {/*Right side -> Study Plan View */}
-      <div className="w-2/3  h-full">
+      <div className="w-2/3  h-full mx-1">
         <StudyPlanView selectedPlan={selectedPlan} />
       </div>
     </div>
