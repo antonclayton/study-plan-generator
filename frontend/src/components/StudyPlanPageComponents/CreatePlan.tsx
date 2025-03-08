@@ -30,7 +30,7 @@ const CreatePlan: React.FC<CreatePlanProps> = ({ handleCreateStudyPlan }) => {
         placeholder="I want to learn _______!"
         value={goal}
         onChange={(e) => setGoal(e.target.value)}
-        className="border-2 border-black m-0.5 text-center w-3/4 bg-zinc-800 p-0.5 rounded-xl text-xs lg:p-2 lg:m-2 lg:text-xl font-bold text-white placeholder:text-zinc-400"
+        className=" m-0.5 text-center w-3/4 bg-zinc-800 p-0.5 rounded-xl text-xs lg:p-2 lg:m-2 lg:text-xl font-bold text-white placeholder:text-zinc-400 border-4 border-zinc-700"
       />
       {/* <input
         type="text"
@@ -41,7 +41,7 @@ const CreatePlan: React.FC<CreatePlanProps> = ({ handleCreateStudyPlan }) => {
       /> */}
       <button
         onClick={handleSubmit}
-        className="border-2 bg-green-900 cursor-pointer w-3/4 text-xs py-0.5 px-1 rounded-xl m-2 text-white border-black font-bold lg:py-2 lg:px-4 lg:text-xl hover:scale-101 hover:bg-green-800 transition-transform duration-300"
+        className=" bg-green-900 cursor-pointer w-3/4 text-xs py-0.5 px-1 rounded-xl m-2 text-white border-4 border-green-800 font-bold lg:py-2 lg:px-4 lg:text-xl hover:scale-101 hover:bg-green-800 transition-transform duration-300"
       >
         Generate Plan
       </button>
