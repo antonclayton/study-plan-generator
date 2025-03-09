@@ -40,7 +40,7 @@ const StudyPlanView: React.FC<StudyPlanViewProps> = ({
             Select or create a plan!
           </h1>
         )}
-        <div className="flex text-white mt-2 sm:mt-3 lg:mt-6 xl:mt-8 font-bold text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg w-4/5 border-2 h-4/5 max-h-4/5 rounded-2xl p-4 sm:p-6 lg:p-8 xl:p-10 overflow-y-auto ">
+        <div className="flex text-white mt-2 sm:mt-3 lg:mt-6 xl:mt-8 font-bold text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg w-9/10 border-2 h-4/5 max-h-4/5 rounded-2xl p-4 sm:p-6 lg:p-8 xl:p-10 overflow-y-auto ">
           {isLoading ? (
             <div className="flex flex-col w-full items-center">
               <p className="text-white text-center mb-4">
