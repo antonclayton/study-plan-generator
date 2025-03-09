@@ -8,63 +8,14 @@ import {
 
 // passed into CreatePlan component as props
 
-const examplePlans: StudyPlanType[] = [
-  {
-    goal: "React.js",
-    plan: "do this and that",
-    id: "1",
-    createdAt: new Date(),
-  },
-  {
-    goal: "Node.js",
-    plan: "Node.js is a runtime environment for JavaScript that is especially useful for backend development",
-    id: "2",
-    createdAt: new Date(),
-  },
-  {
-    goal: "MongoDB",
-    plan: "do this and that",
-    id: "3",
-    createdAt: new Date(),
-  },
-  {
-    goal: "PostgresSQL",
-    plan: "do this and that",
-    id: "4",
-    createdAt: new Date(),
-  },
-  {
-    goal: "Introductory Python",
-    plan: "do this and that",
-    id: "5",
-    createdAt: new Date(),
-  },
-  {
-    goal: "NoSQL Databases",
-    plan: "do this and that",
-    id: "5",
-    createdAt: new Date(),
-  },
-  {
-    goal: "Introductory Java",
-    plan: "do this and that",
-    id: "6",
-    createdAt: new Date(),
-  },
-  {
-    goal: "TypeScript Interfaces",
-    plan: "do this and that",
-    id: "7",
-    createdAt: new Date(),
-  },
-];
-
 const StudyPlan = () => {
   // TODO: reset studyPlans useState to [] by default OR add logic to fill studyPlans with plans from DB
   const [studyPlans, setStudyPlans] = useState<StudyPlanType[]>([]); // List of study plans.
   const [selectedPlan, setSelectedPlan] = useState<StudyPlanType | null>(null); // the study plan to be displayed in the StudyPlanDisplay component.
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleCreateStudyPlan = async (newPlan: StudyPlanInputType) => {
+    setIsLoading(true);
     try {
       const response = await fetch("http://localhost:5000/api/v1/plans", {
         method: "POST",
@@ -99,6 +50,8 @@ const StudyPlan = () => {
     } catch (error) {
       console.error("Error creating study plan:", error);
       // alert("Error creating study plan. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -151,7 +104,7 @@ const StudyPlan = () => {
 
       {/*Right side -> Study Plan View */}
       <div className="w-2/3  h-full mx-1">
-        <StudyPlanView selectedPlan={selectedPlan} />
+        <StudyPlanView selectedPlan={selectedPlan} isLoading={isLoading} />
       </div>
     </div>
   );
