@@ -5,6 +5,7 @@ import StudyPlanListObject from "./StudyPlanListObject";
 interface StudyPlansListProps {
   studyPlans: StudyPlanType[];
   onStudyPlanClick: (studyPlan: StudyPlanType) => void;
+  handleDeleteStudyPlan: (planId: string) => void;
 }
 
 // TODO: ADD SEARCH FUNCTION TO SEARCH FOR STUDYPLANS BY GOAL
@@ -14,6 +15,7 @@ interface StudyPlansListProps {
 const StudyPlansList: React.FC<StudyPlansListProps> = ({
   studyPlans,
   onStudyPlanClick,
+  handleDeleteStudyPlan,
 }) => {
   return (
     <div className="flex flex-col items-center w-full bg-zinc-950 h-3/4 rounded-b-3xl border-x-4 border-t-2 border-b-4 border-zinc-700 overflow-visible">
@@ -31,6 +33,7 @@ const StudyPlansList: React.FC<StudyPlansListProps> = ({
               key={studyPlan.id}
               studyPlan={studyPlan}
               onClick={() => onStudyPlanClick(studyPlan)}
+              handleDelete={() => handleDeleteStudyPlan(studyPlan.id)}
             />
           ))
         ) : (

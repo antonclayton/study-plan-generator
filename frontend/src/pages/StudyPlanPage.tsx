@@ -55,11 +55,52 @@ const StudyPlan = () => {
     }
   };
 
+  const handleDeleteStudyPlan = async (planId: string) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/v1/plans/${planId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+
+        if (errorData.errors) {
+          const validationErrors = errorData.errors;
+          throw new Error(JSON.stringify(validationErrors));
+        } else {
+          throw new Error(
+            `HTTP Error! status: ${response.status}, message: ${
+              errorData.message || response.statusText
+            }`
+          );
+        }
+      }
+
+      const responseData = await response.json();
+      const message: string = responseData.message;
+      console.log("Deleted Plan ID:", planId);
+      console.log("Message:", message);
+
+      setStudyPlans(studyPlans.filter((plan) => plan.id !== planId)); // filter out the deleted plan
+      if (selectedPlan && selectedPlan.id === planId) {
+        // clear selectedPlan if it is currently the one on display
+        setSelectedPlan(null);
+      }
+    } catch (error) {
+      console.error("Error deleting study plan:", error);
+    }
+  };
+
   useEffect(() => {
     const fetchStudyPlans = async () => {
       try {
         const response = await fetch("http://localhost:5000/api/v1/plans");
-
         if (!response.ok) {
           const errorData = await response.json();
           throw new Error(
@@ -99,6 +140,7 @@ const StudyPlan = () => {
         <StudyPlansList
           studyPlans={studyPlans}
           onStudyPlanClick={onStudyPlanClick}
+          handleDeleteStudyPlan={handleDeleteStudyPlan}
         />
       </div>
 

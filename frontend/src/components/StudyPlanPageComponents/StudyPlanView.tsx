@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { StudyPlanInputType, StudyPlanType } from "../../types/StudyPlanTypes";
+import LoadingSpinner from "../LoadingSpinner";
 
 interface StudyPlanViewProps {
   selectedPlan: StudyPlanType | null;
@@ -35,13 +36,18 @@ const StudyPlanView: React.FC<StudyPlanViewProps> = ({
               : "No Plan Selected"}
           </h1>
         ) : (
-          "Select or create a plan!"
+          <h1 className="text-white mt-2 sm:mt-3 lg:mt-6 xl:mt-8 font-bold text-lg sm:text-xl lg:text-2xl xl:text-3xl">
+            Select or create a plan!
+          </h1>
         )}
-        <div className="text-white mt-2 sm:mt-3 lg:mt-6 xl:mt-8 font-bold text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg w-4/5 border-2 h-4/5 max-h-4/5 rounded-2xl p-4 sm:p-6 lg:p-8 xl:p-10 overflow-y-auto ">
+        <div className="flex text-white mt-2 sm:mt-3 lg:mt-6 xl:mt-8 font-bold text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg w-4/5 border-2 h-4/5 max-h-4/5 rounded-2xl p-4 sm:p-6 lg:p-8 xl:p-10 overflow-y-auto ">
           {isLoading ? (
-            <p className="text-white text-center">
-              Generating your study plan...
-            </p>
+            <div className="flex flex-col w-full items-center">
+              <p className="text-white text-center mb-4">
+                Generating your study plan...
+              </p>
+              <LoadingSpinner isLoading={true} />
+            </div>
           ) : selectedPlan && selectedPlan.plan ? (
             <div className="text-white mt-4">
               {steps.length > 0 ? (
