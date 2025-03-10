@@ -1,5 +1,5 @@
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
-import { DatabaseError } from "../errors/DatabaseError";
+import { DatabaseError, DuplicateError } from "../errors";
 import prisma from "../prisma/client";
 
 export async function createUser(email: string, password: string) {
@@ -13,8 +13,8 @@ export async function createUser(email: string, password: string) {
   } catch (error) {
     if (error instanceof PrismaClientKnownRequestError) {
       if (error.code === "P2002") {
-        // Unique constraint violation (e.g., duplicate email)
-        throw new Error("Email address already in use.");
+        // Unique constraint violation (duplicate email)
+        throw new DuplicateError("Email address already in use.");
       }
       // Other Prisma errors
       console.error("Prisma Error (Create User):", error);

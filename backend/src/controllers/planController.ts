@@ -6,9 +6,8 @@ import {
   studyPlanIdSchema,
   updateStudyPlanSchema,
 } from "../zodSchemas/studyPlanSchema";
-import { ValidationError } from "../errors/ValidationError";
-import { NotFoundError } from "../errors/NotFoundError";
 import { generateStudyPlan } from "../utils/aiServices";
+import { NotFoundError, ValidationError } from "../errors";
 
 export async function getAllStudyPlans(
   req: Request,
