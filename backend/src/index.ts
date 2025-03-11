@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import planRoutes from "./routes/planRoutes";
 import errorHandler from "./middleware/errorHandler";
+import authRoutes from "./routes/authRoutes";
 
 dotenv.config();
 
@@ -18,7 +19,8 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-app.use("/api/v1/plans", planRoutes);
+app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/protected/plans", planRoutes);
 app.use(errorHandler);
 
 app.listen(PORT, () => {

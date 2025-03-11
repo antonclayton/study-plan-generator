@@ -5,14 +5,15 @@ import {
   getAllStudyPlans,
   updateStudyPlan,
 } from "../controllers/planController";
+import { authMiddleware } from "../middleware/authMiddleware";
 
 const router = Router();
 
 // GET
-router.get("/", getAllStudyPlans);
+router.get("/", authMiddleware, getAllStudyPlans);
 
 // POST
-router.post("/", createStudyPlan);
+router.post("/", authMiddleware, createStudyPlan);
 
 // UPDATE
 router.patch("/:id", updateStudyPlan);

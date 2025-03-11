@@ -33,7 +33,7 @@ export function authMiddleware(
       }
     });
   } else {
-    res.status(401).json({ message: "Authorization header missing" }); // unauthorized
+    res.status(401).json({ message: "Unauthorized Request" }); // unauthorized
     return;
   }
 }
