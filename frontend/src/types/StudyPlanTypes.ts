@@ -5,5 +5,6 @@ export interface StudyPlanInputType {
 
 export interface StudyPlanType extends StudyPlanInputType {
   id: string;
+  userId: string;
   createdAt: Date;
 }
