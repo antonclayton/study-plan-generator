@@ -7,15 +7,27 @@ import {
   updateStudyPlanSchema,
 } from "../zodSchemas/studyPlanSchema";
 import { generateStudyPlan } from "../utils/aiServices";
-import { NotFoundError, ValidationError } from "../errors";
+import { NotFoundError, UnauthorizedError, ValidationError } from "../errors";
+import { AuthenticatedRequest } from "../types/AuthenticatedRequest";
 
 export async function getAllStudyPlans(
-  req: Request,
+  req: AuthenticatedRequest,
   res: Response,
   next: NextFunction
 ) {
   try {
-    const studyPlans = await prisma.studyPlan.findMany();
+    const userId = req.user?.userId;
+
+    if (!userId) {
+      next(new UnauthorizedError("Unauthorized request"));
+      return;
+    }
+
+    const studyPlans = await prisma.studyPlan.findMany({
+      where: {
+        userId: userId,
+      },
+    });
     res.status(200).json(studyPlans);
   } catch (error) {
     next(error);
@@ -23,7 +35,7 @@ export async function getAllStudyPlans(
 }
 
 export async function createStudyPlan(
-  req: Request,
+  req: AuthenticatedRequest,
   res: Response,
   next: NextFunction
 ) {
@@ -34,16 +46,26 @@ export async function createStudyPlan(
   }
   const { goal } = validatedBody.data;
   try {
+    const userId = req.user?.userId;
+
+    if (!userId) {
+      next(new UnauthorizedError("Unauthorized request"));
+      return;
+    }
+
     const aiGeneratedPlan = await generateStudyPlan(goal);
     const newStudyPlan = await prisma.studyPlan.create({
       data: {
         goal: goal,
         plan: aiGeneratedPlan,
+        userId: userId,
       },
       select: {
+        // When create function is called, it also returns back the studyplan for use in the frontend
         id: true,
         goal: true,
         plan: true,
+        userId: true,
         createdAt: true,
       },
     });
