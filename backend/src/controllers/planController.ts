@@ -119,7 +119,7 @@ export async function updateStudyPlan(
 }
 
 export async function deleteStudyPlan(
-  req: Request,
+  req: AuthenticatedRequest,
   res: Response,
   next: NextFunction
 ) {
@@ -132,11 +132,25 @@ export async function deleteStudyPlan(
   const { id } = validatedParams.data;
 
   try {
+    const userId = req.user?.userId;
+    if (!userId) {
+      next(new UnauthorizedError("Unauthorized request"));
+      return;
+    }
     const existingStudyPlan = await prisma.studyPlan.findUnique({
       where: { id },
     });
     if (!existingStudyPlan) {
       next(new NotFoundError("Study plan not found"));
+      return;
+    }
+
+    if (existingStudyPlan.userId !== userId) {
+      next(
+        new UnauthorizedError(
+          "You do not have permission to delete this study plan"
+        )
+      );
       return;
     }
 

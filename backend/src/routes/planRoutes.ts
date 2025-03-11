@@ -19,6 +19,6 @@ router.post("/", authMiddleware, createStudyPlan);
 router.patch("/:id", updateStudyPlan);
 
 // DELETE
-router.delete("/:id", deleteStudyPlan);
+router.delete("/:id", authMiddleware, deleteStudyPlan);
 
 export default router;
