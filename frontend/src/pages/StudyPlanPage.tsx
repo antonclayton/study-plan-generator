@@ -17,13 +17,16 @@ const StudyPlan = () => {
   const handleCreateStudyPlan = async (newPlan: StudyPlanInputType) => {
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/api/v1/plans", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newPlan),
-      });
+      const response = await fetch(
+        "http://localhost:5000/api/v1/protected/plans",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newPlan),
+        }
+      );
       if (!response.ok) {
         const errorData = await response.json();
 
@@ -58,7 +61,7 @@ const StudyPlan = () => {
   const handleDeleteStudyPlan = async (planId: string) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/v1/plans/${planId}`,
+        `http://localhost:5000/api/v1/protected/plans/${planId}`,
         {
           method: "DELETE",
           headers: {
@@ -100,7 +103,9 @@ const StudyPlan = () => {
   useEffect(() => {
     const fetchStudyPlans = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/v1/plans");
+        const response = await fetch(
+          "http://localhost:5000/api/v1/protected/plans"
+        );
         if (!response.ok) {
           const errorData = await response.json();
           throw new Error(
