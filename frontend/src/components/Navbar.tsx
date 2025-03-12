@@ -15,6 +15,12 @@ const Navbar = () => {
       >
         Study Plans
       </Link>
+      <Link
+        to="/login"
+        className="text-white text-sm font-bold cursor-pointer sm:text-base lg:text-xl hover:underline hover:scale-105 transition-transform duration-200"
+      >
+        Login
+      </Link>
     </div>
   );
 };
