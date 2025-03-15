@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import prisma from "../prisma/client";
 import { loginSchema, registerSchema } from "../zodSchemas/userSchemas";
-import { NotFoundError, ValidationError } from "../errors";
+import { DuplicateError, NotFoundError, ValidationError } from "../errors";
 import bcrypt from "bcryptjs";
 import { createUser, findUserByEmail } from "../prisma models/userModel";
 import jwt from "jsonwebtoken";
@@ -22,6 +22,11 @@ export async function registerUser(
   const { email, password } = validatedBody.data;
 
   try {
+    const user = await findUserByEmail(email);
+    if (user) {
+      next(new DuplicateError("Account with this email already exists!"));
+      return;
+    }
     const hashPassword = await bcrypt.hash(password, 10);
     await createUser(email, hashPassword);
     res.status(201).json({ message: "User registered successfully" });
@@ -29,6 +34,7 @@ export async function registerUser(
     next(error);
   }
 }
+
 export async function loginUser(
   req: Request,
   res: Response,
