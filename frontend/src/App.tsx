@@ -5,10 +5,11 @@ import Home from "./pages/Home";
 import StudyPlan from "./pages/StudyPlanPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import { AuthProvider } from "./auth/AuthProvider";
 
 function App() {
   return (
-    <div>
+    <AuthProvider>
       <Router>
         <Navbar />
         <Routes>
@@ -18,7 +19,7 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
         </Routes>
       </Router>
-    </div>
+    </AuthProvider>
   );
 }
 

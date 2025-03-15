@@ -61,7 +61,7 @@ export async function loginUser(
       }
     );
 
-    res.json({ token });
+    res.json({ token, userId: user.id });
   } catch (error) {
     next(error);
   }
