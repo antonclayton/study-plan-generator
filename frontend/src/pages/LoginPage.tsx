@@ -1,15 +1,25 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from "../services/authServices";
 
 const loginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      await loginUser(email, password);
+      console.log("Successful login with email:", email);
+      navigate("/plans"); // go to study plans page after successful login
     } catch (error) {
-      console.error("Login failed:", error);
+      if (error instanceof Error) {
+        console.error("Login failed:", error);
+        alert(error.message);
+      } else {
+        console.error("Login failed for an unknown reason:", error);
+      }
     }
   };
   return (

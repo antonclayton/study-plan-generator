@@ -1,14 +1,25 @@
 import React, { useState } from "react";
+import { registerUser } from "../services/authServices";
+import { useNavigate } from "react-router-dom";
 
 const registerPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      await registerUser(email, password);
+      console.log("Successfully registered user with email:", email);
+      navigate("/login"); // go to login after successful registration
     } catch (error) {
-      console.error("Register failed:", error);
+      if (error instanceof Error) {
+        console.error("Register failed:", error);
+        alert(error.message);
+      } else {
+        console.error("Register failed for an unknown reason:", error);
+      }
     }
   };
   return (
