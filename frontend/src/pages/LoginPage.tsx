@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../services/authServices";
+import { useAuth } from "../auth/AuthProvider";
 
-const loginPage = () => {
+const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await loginUser(email, password);
+      const { token, userId } = await loginUser(email, password);
+      login(token, userId);
       console.log("Successful login with email:", email);
       navigate("/plans"); // go to study plans page after successful login
     } catch (error) {
@@ -60,4 +63,4 @@ const loginPage = () => {
   );
 };
 
-export default loginPage;
+export default LoginPage;

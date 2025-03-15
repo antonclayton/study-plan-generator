@@ -5,6 +5,8 @@ import {
   CreatePlan,
   StudyPlanView,
 } from "../components/StudyPlanPageComponents";
+import { useAuth } from "../auth/AuthProvider";
+import { Navigate } from "react-router-dom";
 
 // passed into CreatePlan component as props
 
@@ -13,6 +15,7 @@ const StudyPlan = () => {
   const [studyPlans, setStudyPlans] = useState<StudyPlanType[]>([]); // List of study plans.
   const [selectedPlan, setSelectedPlan] = useState<StudyPlanType | null>(null); // the study plan to be displayed in the StudyPlanDisplay component.
   const [isLoading, setIsLoading] = useState(false);
+  const { token, userId, isLoggedIn } = useAuth();
 
   const handleCreateStudyPlan = async (newPlan: StudyPlanInputType) => {
     setIsLoading(true);
@@ -23,6 +26,7 @@ const StudyPlan = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(newPlan),
         }
@@ -66,6 +70,7 @@ const StudyPlan = () => {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -104,7 +109,12 @@ const StudyPlan = () => {
     const fetchStudyPlans = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/v1/protected/plans"
+          "http://localhost:5000/api/v1/protected/plans",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         if (!response.ok) {
           const errorData = await response.json();
@@ -127,8 +137,10 @@ const StudyPlan = () => {
         console.error("Error creating study plan: ");
       }
     };
-    fetchStudyPlans();
-  }, []);
+    if (isLoggedIn && token) {
+      fetchStudyPlans();
+    }
+  }, [token, isLoggedIn]);
 
   const onStudyPlanClick = (studyPlan: StudyPlanType) => {
     setSelectedPlan(studyPlan);
@@ -136,6 +148,10 @@ const StudyPlan = () => {
 
   //TODO: Refresh logic when studyPLans changes)
   useEffect(() => {}, [studyPlans]);
+
+  if (!isLoggedIn) {
+    return <Navigate to="/login" replace />; // if user is not logged in, take them to login page
+  }
 
   return (
     <div className="flex bg-black h-[calc(100vh-4rem)]">
